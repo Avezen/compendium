@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="stylesheet" type="text/css" href="{{ asset('build/css/app.css') }}">
+
+        <script>
+            window.loadPromise = new Promise(function(resolve) {
+                window.addEventListener('load', resolve);
+            });
+        </script>
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+
+        <script src="{{ asset('build/js/app.js') }}"></script>
+        <script src="{{ asset('build/runtime.js') }}"></script>
+    </body>
+</html>
