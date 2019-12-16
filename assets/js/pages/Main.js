@@ -2,22 +2,29 @@ import React, {Component} from 'react';
 import {FormattedMessage} from "react-intl";
 import {withRouter} from "react-router-dom";
 import {withHelmet} from "../components/HOC/withHelmet";
+import {fetchCategories} from "../service/CategoryService";
+import {withData} from "../components/HOC/withData";
 
 class MainPageBase extends Component {
     render() {
+        const {data} = this.props;
+
         return (
-                <div className={'main-page'}>
-                    <h1>
-                        <div>
-                            Hello main page!
-                        </div>
-                    </h1>
-                    <br/>
-                    <FormattedMessage id="navigation.dashboard"/>
+            <div className={'main-page'}>
+                <div>
+                    Hello main page!
                 </div>
+                <br/>
+                <FormattedMessage id="navigation.dashboard"/>
+            </div>
         );
     }
 }
 
 export const MainPageWithHelmet = withHelmet(MainPageBase);
-export const Main = withRouter(MainPageWithHelmet);
+export const MainWithRouter = withRouter(MainPageWithHelmet);
+
+export const Main = withData(
+    MainWithRouter,
+    (fetchData) => fetchCategories()
+);

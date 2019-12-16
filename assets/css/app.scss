@@ -1,3 +1,90 @@
+$menuTransition: 500ms;
+$appBarHeight: 4em;
+
+$closedNavWidth: 4em;
+$openedNavWidth: 12em;
+
+
 body {
   margin: 0;
+}
+
+.main-layout {
+  display: flex;
+
+  &__app-bar {
+    width: 100%;
+    height: $appBarHeight;
+    position: fixed;
+    z-index: 100;
+    background-color: green;
+  }
+
+  &__navigation {
+    height: 100vh;
+    position: fixed;
+    margin-top: $appBarHeight;
+    z-index: 1000;
+    background-color: white;
+
+    &--open {
+      width: $openedNavWidth;
+      transition: all $menuTransition;
+    }
+
+    &--close {
+      width: $closedNavWidth;
+      transition: all $menuTransition;
+    }
+  }
+
+  &__content {
+    width: 100%;
+
+    .app-content {
+      margin-top: $appBarHeight;
+    }
+
+    &--open {
+      margin-left: $openedNavWidth;
+      transition: all $menuTransition;
+
+      &.mobile {
+        margin-left: $closedNavWidth;
+        transition: all $menuTransition;
+
+        .overlay {
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0,0,0, 0.5);
+          position: fixed;
+          top: $appBarHeight;
+        }
+      }
+    }
+
+    &--close {
+      margin-left: $closedNavWidth;
+      transition: all $menuTransition;
+
+      &.mobile {
+        margin-left: $closedNavWidth;
+      }
+    }
+  }
+}
+
+.navigation {
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.page {
+  width: 100%;
 }
