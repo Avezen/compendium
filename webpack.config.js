@@ -25,8 +25,8 @@ Encore
      */
     .enableSassLoader()
     .addStyleEntry('css/app', ['./assets/css/app.scss'])
-    .addStyleEntry('css/page/Main', ['./assets/css/main_page.scss'])
-    .addStyleEntry('css/page/About', ['./assets/css/about_page.scss'])
+    .addStyleEntry('css/page/Home', ['./assets/css/home_page.scss'])
+    .addStyleEntry('css/page/ReactJS', ['./assets/css/about_page.scss'])
 
     .enableReactPreset()
     .addEntry('js/app', ['babel-polyfill', './assets/js/app.js'])

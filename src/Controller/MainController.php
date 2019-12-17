@@ -17,9 +17,41 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/about", name="about")
+     * @Route("/symfony", name="symfony")
      */
-    public function about()
+    public function symfony()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
+     * @Route("/symfony/{topic}", name="symfony_topic")
+     */
+    public function symfonyTopic()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
+     * @Route("/symfony/{topic}/{example}", name="symfony_topic_example")
+     */
+    public function symfonyTopicExample()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
+     * @Route("/react", name="react")
+     */
+    public function react()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
+     * @Route("/css", name="css")
+     */
+    public function css()
     {
         return $this->render('main/index.html.twig');
     }

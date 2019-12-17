@@ -3,16 +3,13 @@ import React, {Component} from "react";
 import {
     BrowserRouter as Router,
     Route,
-    Switch,
-    Redirect, Link
+    Switch
 } from "react-router-dom";
-import {DEFAULT_ROUTE, GLOBAL_ROUTES} from "./constans/routerConfig";
+import {DEFAULT_ROUTE, GLOBAL_ROUTES, NESTED_ROUTES} from "./constans/routerConfig";
 import {IntlProvider} from "react-intl";
 import {flattenMessages} from "./helpers/flattenMessages";
 import {messages} from "./constans/messages"
 import {LOCALE} from "./constans/locales";
-import {Main} from "./pages/Main";
-import {About} from "./pages/About";
 import {TransitionGroup, Transition} from "react-transition-group";
 import {exit, play} from "./service/Animate";
 import PageWrapper from "./components/PageWrapper";
@@ -30,9 +27,7 @@ class App extends Component {
                 />
         );
 
-
         return (
-
             <IntlProvider locale={LOCALE.EN} messages={flattenMessages(messages[LOCALE.EN])}>
                 <Router>
                     <PageWrapper>

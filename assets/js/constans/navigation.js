@@ -2,10 +2,15 @@ import {PRIVATE_ROUTES, PUBLIC_ROUTES} from './routes';
 
 export const navigationItems = [
   {
-    label: 'main',
-    to: `/${PUBLIC_ROUTES.MAIN}` },
+    label: 'symfony',
+    to: `/${PUBLIC_ROUTES.SYMFONY}`
+  },
   {
-    label: 'about',
-    to: `/${PUBLIC_ROUTES.ABOUT}`,
+    label: 'react',
+    to: `/${PUBLIC_ROUTES.REACT}`,
+  },
+  {
+    label: 'css',
+    to: `/${PUBLIC_ROUTES.CSS}`,
   }
 ];

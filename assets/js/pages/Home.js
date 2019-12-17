@@ -10,7 +10,7 @@ class MainPageBase extends Component {
         const {data} = this.props;
 
         return (
-            <div className={'main-page'}>
+            <div className={'home-page'}>
                 <div>
                     Hello main page!
                 </div>
@@ -24,7 +24,7 @@ class MainPageBase extends Component {
 export const MainPageWithHelmet = withHelmet(MainPageBase);
 export const MainWithRouter = withRouter(MainPageWithHelmet);
 
-export const Main = withData(
+export const Home = withData(
     MainWithRouter,
     (fetchData) => fetchCategories()
 );

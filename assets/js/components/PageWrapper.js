@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-import {Navigation} from "./Menu/Navigation/Navigation";
+import {AppBar} from "./AppBar/AppBar";
+import {withData} from "./HOC/withData";
+import {fetchSymfonyTree} from "../service/SymfonyTreeService";
+import {Navigation} from "./Navigation/Navigation";
 
 
 class PageWrapper extends Component {
@@ -7,7 +10,6 @@ class PageWrapper extends Component {
         menuToggle: true,
         isMobile: false
     };
-
 
     componentDidMount() {
         this.toggleMobile();
@@ -35,20 +37,20 @@ class PageWrapper extends Component {
     };
 
     render() {
-        const {children} = this.props;
+        const {children, data} = this.props;
         const {menuToggle, isMobile} = this.state;
 
         return (
             <div className={'main-layout'}>
                 <header
-                    className={'main-layout__app-bar'} onClick={this.toggleMenu}
+                    className={'main-layout__app-bar'}
                 >
-                    header
+                    <AppBar toggleLogo={isMobile}/>
                 </header>
                 <nav
                     className={`main-layout__navigation main-layout__navigation${menuToggle ? '--open' : '--close'}`}
                 >
-                    <Navigation/>
+                    <Navigation navigationItems={data}/>
                 </nav>
                 <main
                     className={`main-layout__content main-layout__content--${menuToggle ? 'open' : 'close'} ${isMobile ? 'mobile' : ''}`}
@@ -68,4 +70,8 @@ class PageWrapper extends Component {
     }
 }
 
-export default PageWrapper;
+export default PageWrapper = withData(
+    PageWrapper,
+    (fetchData) => fetchSymfonyTree()
+);
+

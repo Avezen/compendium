@@ -1,6 +1,8 @@
 export const PUBLIC_ROUTES = {
   MAIN: '',
-  ABOUT: 'about',
+  REACT: 'react',
+  SYMFONY: 'symfony',
+  CSS: 'css',
 };
 
 export const PRIVATE_ROUTES = {

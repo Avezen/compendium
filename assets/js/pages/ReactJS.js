@@ -3,13 +3,13 @@ import {withRouter} from "react-router-dom";
 import {FormattedMessage} from "react-intl";
 import {withHelmet} from "../components/HOC/withHelmet";
 
-class AboutPageBase extends Component {
+class ReactJSPageBase extends Component {
     render() {
         return (
-                <div className={'about-page'}>
+                <div className={'react-page'}>
                     <div className={'content'}>
                         <div className={'content--inner'}>
-                            Hello about page!
+                            Hello react page!
                             <br/>
                             <FormattedMessage id="navigation.dashboard"/>
                         </div>
@@ -19,5 +19,5 @@ class AboutPageBase extends Component {
     }
 }
 
-export const AboutPageWithHelmet = withHelmet(AboutPageBase);
-export const About = withRouter(AboutPageWithHelmet);
+export const ReactJSPageWithHelmet = withHelmet(ReactJSPageBase);
+export const ReactJS = withRouter(ReactJSPageWithHelmet);
