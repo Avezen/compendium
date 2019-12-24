@@ -2,8 +2,8 @@ import React, {Component} from 'react';
 import {FormattedMessage} from "react-intl";
 import {withRouter} from "react-router-dom";
 import {withHelmet} from "../components/HOC/withHelmet";
-import {fetchCategories} from "../service/CategoryService";
 import {withData} from "../components/HOC/withData";
+import {fetchSymfony} from "../service/SymfonyService";
 
 class MainPageBase extends Component {
     render() {
@@ -26,5 +26,5 @@ export const MainWithRouter = withRouter(MainPageWithHelmet);
 
 export const Home = withData(
     MainWithRouter,
-    (fetchData) => fetchCategories()
+    (fetchData) => fetchSymfony()
 );

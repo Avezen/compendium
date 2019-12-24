@@ -7,55 +7,31 @@ import * as ReactDOM from "react-dom";
 import {Navigation, NavigationBase} from "../Navigation";
 
 
-export const NavigationItemLinkBase = ({className, label, to, location}) => {
+export const NavigationItemLinkBase = ({className, item, level, selected, setSelected, path, location}) => {
     const myRef = createRef();
+
+    const {label, to} = item;
 
     useEffect(() => {
         if ('/symfony' + to === location.pathname) {
-            focusCurrentNavigationTree();
+            if(JSON.stringify(selected) !== JSON.stringify(path)){
+                setSelected(path);
+            }
         }
     });
 
-    const focusParentNavButton = (child) => {
-        let parentDiv = child.closest("div");
-        parentDiv.classList.add('nested-routes--open');
-        let navButton = parentDiv.previousSibling;
-
-        if (navButton){
-            navButton.classList.add('selected');
-            return navButton;
-        }else{
-            return null;
-        }
-    };
-
-    const focusCurrentNavigationTree = () => {
-        let navButtons = document.getElementsByClassName('nav-button');
-
-        navButtons.forEach((button)=>{
-            button.classList.remove('selected')
-        });
-
-        if (myRef.current) {
-            let upperNavButton = focusParentNavButton(myRef.current);
-
-            do {
-                upperNavButton = focusParentNavButton(upperNavButton);
-            }while(upperNavButton !== null);
-        }
-
-    };
-
     return (
-        <li>
+        <li className={`level-${level}`}>
             <Link
                 to={'/symfony' + to}
                 ref={myRef}
-                onClick={() => focusCurrentNavigationTree()}
+                onClick={() => {
+                    setSelected(path);
+                }}
             >
-                    <span>
-                        {label}
-                    </span>
+                <span>
+                    {label}
+                </span>
             </Link>
         </li>
     );

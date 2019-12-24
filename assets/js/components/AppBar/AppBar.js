@@ -3,19 +3,19 @@ import logo from "../../assets/compendium.png";
 import { Link } from 'react-router-dom';
 import {Menu} from "../Menu/Menu";
 
-export const AppBar = ({toggleLogo}) => {
+export const AppBar = ({toggleLogo, handleChange}) => {
     return (
         <div
             className={'app-bar'}
         >
-            <div className={`app-bar__logo-wrapper${toggleLogo ? '--hidden' : ''}`}>
+            <div className={'app-bar__logo-wrapper'}>
                 <Link to={'/'}>
                     <img src={logo} alt={'logo'} width={160}/>
                 </Link>
             </div>
 
             <nav>
-                <Menu/>
+                <Menu handleChange={handleChange}/>
             </nav>
 
             <div className={'app-bar__button-wrapper'}>

@@ -12,7 +12,9 @@ import {messages} from "./constans/messages"
 import {LOCALE} from "./constans/locales";
 import {TransitionGroup, Transition} from "react-transition-group";
 import {exit, play} from "./service/Animate";
-import PageWrapper from "./components/PageWrapper";
+import {store} from "./store";
+import {Provider} from "react-redux";
+import {PageWrapper} from "./components/PageWrapper";
 
 class App extends Component {
 
@@ -28,32 +30,35 @@ class App extends Component {
         );
 
         return (
-            <IntlProvider locale={LOCALE.EN} messages={flattenMessages(messages[LOCALE.EN])}>
-                <Router>
-                    <PageWrapper>
-                        <Route render={(location) => {
-                            const {pathname, key} = location.location;
+            <Provider store={store}>
+                <IntlProvider locale={LOCALE.EN} messages={flattenMessages(messages[LOCALE.EN])}>
+                    <Router>
+                        <PageWrapper>
+                            <Route
+                                render={({location}) => {
+                                    const {pathname, key} = location;
 
-                            return (
-                                <TransitionGroup component={null}>
-                                    <Transition
-                                        key={key}
-                                        appear={true}
-                                        onEnter={(node, appears) => play(pathname, node, appears)}
-                                        onExit={(node, appears) => exit(node, appears)}
-                                        timeout={{enter: 750, exit: 150}}
-                                    >
-                                        <Switch location={location.location}>
-                                            {routeComponents}
-                                        </Switch>
-                                    </Transition>
-                                </TransitionGroup>
-                            )
-                        }}
-                        />
-                    </PageWrapper>
-                </Router>
-            </IntlProvider>
+                                    return (
+                                        <TransitionGroup component={null}>
+                                            <Transition
+                                                key={key}
+                                                appear={true}
+                                                onEnter={(node, appears) => play(pathname, node, appears)}
+                                                onExit={(node, appears) => exit(node, appears)}
+                                                timeout={{enter: 750, exit: 150}}
+                                            >
+                                                <Switch location={location}>
+                                                    {routeComponents}
+                                                </Switch>
+                                            </Transition>
+                                        </TransitionGroup>
+                                    )
+                                }}
+                            />
+                        </PageWrapper>
+                    </Router>
+                </IntlProvider>
+            </Provider>
         );
     }
 }

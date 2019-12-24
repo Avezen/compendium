@@ -1,15 +1,25 @@
 import * as React from 'react';
 
-import {NavigationItem} from './NavigationItem/NavigationItem';
+import {NavigationItem} from '../../containers/NavigationItem';
+import {useState} from "react";
+import {useEffect} from "react";
 
-export const Navigation = ({navigationItems, location}) => {
+export const Navigation = ({navigationItems}) => {
+    const [selected, setSelected] = useState([]);
+
+    useEffect(() => {
+        setSelected([])
+    }, [navigationItems]);
+
     return (
         <ul className={'navigation'}>
-            {navigationItems.map((item, key) => (
+            {navigationItems && navigationItems.map((item, key) => (
                 <NavigationItem
                     key={key}
                     level={0}
-                    {...item}
+                    selected={selected}
+                    setSelected={setSelected}
+                    item={item}
                 />
             ))}
         </ul>

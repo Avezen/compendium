@@ -1,8 +1,8 @@
 import { PUBLIC_ROUTES, PRIVATE_ROUTES } from './routes';
 import {Home} from "../pages/Home";
 import {ReactJS} from "../pages/ReactJS";
-import {Symfony} from "../pages/Symfony";
 import {CSS} from "../pages/CSS";
+import {Symfony} from "../pages/Symfony";
 
 export const DEFAULT_ROUTE = `/${PUBLIC_ROUTES.MAIN}`;
 

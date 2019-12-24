@@ -1,6 +1,6 @@
 
-export const fetchCategories = () => {
-    const categoryItems = [
+export const fetchSymfony = () => {
+    const symfonyItems = [
         {
             id: 1,
             name: 'Malowanie',
@@ -198,7 +198,7 @@ export const fetchCategories = () => {
     return new Promise((resolve, reject) => {
         let wait = setTimeout(() => {
             clearTimeout(wait);
-            resolve(categoryItems);
+            resolve(symfonyItems);
             reject('Wrong')
         }, 1)
     });

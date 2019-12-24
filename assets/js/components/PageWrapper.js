@@ -1,77 +1,87 @@
 import React, {Component} from 'react';
 import {AppBar} from "./AppBar/AppBar";
-import {withData} from "./HOC/withData";
-import {fetchSymfonyTree} from "../service/SymfonyTreeService";
 import {Navigation} from "./Navigation/Navigation";
+import {
+    fetchNavigationIfNeeded,
+    invalidateMenuItem,
+    selectMenuItem,
+} from "../store/actions/fetchNavigation";
+import {connect} from "react-redux";
+import {withRouter} from "react-router-dom";
+import MainLayout from "../layouts/MainLayout";
+import * as PropTypes from "prop-types";
+import {cutToFirstOccurrence} from "../helpers";
 
 
-class PageWrapper extends Component {
-    state = {
-        menuToggle: true,
-        isMobile: false
-    };
+class PageWrapperBase extends Component {
 
     componentDidMount() {
-        this.toggleMobile();
-        window.addEventListener('resize', this.toggleMobile);
+        const {dispatch} = this.props;
+
+        let initSelectedMenu = this.props.location.pathname.replace('/', '');
+        initSelectedMenu = cutToFirstOccurrence(initSelectedMenu, '/');
+
+        dispatch(selectMenuItem(initSelectedMenu));
+        dispatch(fetchNavigationIfNeeded(initSelectedMenu));
     }
 
-    componentWillUnmount() {
-        window.removeEventListener('resize', this.toggleMobile);
-    }
+    handleChange = (menuItem) => {
+        const {dispatch} = this.props;
 
-    toggleMenu = () => {
-        this.setState((prevState) => ({
-            menuToggle: !prevState.menuToggle
-        }));
+        dispatch(selectMenuItem(menuItem));
+        dispatch(fetchNavigationIfNeeded(menuItem));
     };
 
-    toggleMobile = () => {
-        const {isMobile} = this.state;
+    handleRefreshClick = (e) => {
+        e.preventDefault();
+        const {dispatch, selectedMenu} = this.props;
 
-        if (isMobile && window.innerWidth >= 768) {
-            this.setState({isMobile: false});
-        } else if (!isMobile && window.innerWidth < 768) {
-            this.setState({isMobile: true});
-        }
+        dispatch(invalidateMenuItem(selectedMenu));
+        dispatch(fetchNavigationIfNeeded(selectedMenu));
     };
+
 
     render() {
-        const {children, data} = this.props;
-        const {menuToggle, isMobile} = this.state;
+        const {children, navigation} = this.props;
 
         return (
-            <div className={'main-layout'}>
-                <header
-                    className={'main-layout__app-bar'}
-                >
-                    <AppBar toggleLogo={isMobile}/>
-                </header>
-                <nav
-                    className={`main-layout__navigation main-layout__navigation${menuToggle ? '--open' : '--close'}`}
-                >
-                    <Navigation navigationItems={data}/>
-                </nav>
-                <main
-                    className={`main-layout__content main-layout__content--${menuToggle ? 'open' : 'close'} ${isMobile ? 'mobile' : ''}`}
-                >
-                    <div
-                        className={`app-content`}
-                    >
-                        {children}
-                    </div>
-                    <div
-                        className={'overlay'}
-                    >
-                    </div>
-                </main>
-            </div>
+            <MainLayout
+                appBar={<AppBar handleChange={this.handleChange}/>}
+                navigation={<Navigation navigationItems={navigation}/>}
+                pageContent={children}
+            />
         );
     }
 }
 
-export default PageWrapper = withData(
-    PageWrapper,
-    (fetchData) => fetchSymfonyTree()
-);
+const PageWrapperWithRouter = withRouter(PageWrapperBase);
 
+function mapStateToProps(state) {
+    const {selectedMenu, navigationByMenu} = state;
+    const {isFetching, lastUpdated, items: navigation} = navigationByMenu[
+        selectedMenu
+        ] || {
+        isFetching: true,
+        items: []
+    };
+
+    return {
+        selectedMenu,
+        navigation,
+        isFetching,
+        lastUpdated
+    }
+}
+
+export const PageWrapper = connect(
+    mapStateToProps
+)(PageWrapperWithRouter);
+
+
+PageWrapperBase.propTypes = {
+    selectedMenu: PropTypes.string.isRequired,
+    navigation: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired,
+    lastUpdated: PropTypes.number,
+    dispatch: PropTypes.func.isRequired
+};

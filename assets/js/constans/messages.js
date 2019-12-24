@@ -8,13 +8,13 @@ export const messages = {
         navigation: {
             dashboard: 'en',
         },
-        homePage: {
-            pageTitle: "Home"
+        cssPage: {
+            pageTitle: "CSS"
         },
         symfonyPage: {
             pageTitle: "Symfony"
         },
-        aboutPage: {
+        reactPage: {
             pageTitle: "ReactJS"
         }
     }

@@ -2,12 +2,17 @@ import React, {Component} from 'react';
 import {FormattedMessage} from "react-intl";
 import {withRouter} from "react-router-dom";
 import {withHelmet} from "../components/HOC/withHelmet";
-import {fetchSymfonyTree} from "../service/SymfonyTreeService";
 import {withData} from "../components/HOC/withData";
+import {fetchPostsIfNeeded, invalidateSubreddit, selectSubreddit} from "../store/actions/fetchNavigation";
+import PropTypes from "prop-types";
+import {connect} from "react-redux";
+import {fetchSymfony} from "../service/SymfonyService";
 
-class SymfonyPageBase extends Component {
+export class SymfonyPageBase extends Component {
+
+
     render() {
-        const {data} = this.props;
+        const {data, match} = this.props;
 
         return (
             <div className={'symfony-page'}>
@@ -17,7 +22,7 @@ class SymfonyPageBase extends Component {
                         <br/>
                         <FormattedMessage id="navigation.dashboard"/>
                         <br/>
-                        {this.props.match.params.topic}
+                        {match.params.topic}
                     </div>
                 </div>
             </div>
@@ -25,10 +30,16 @@ class SymfonyPageBase extends Component {
     }
 }
 
+
+
 export const SymfonyPageWithHelmet = withHelmet(SymfonyPageBase);
 export const SymfonyWithRouter = withRouter(SymfonyPageWithHelmet);
 
+
+
 export const Symfony = withData(
     SymfonyWithRouter,
-    (fetchData) => fetchSymfonyTree()
+    (fetchData) => fetchSymfony()
 );
+
+

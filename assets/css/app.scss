@@ -17,22 +17,33 @@ body {
     height: $appBarHeight;
     position: fixed;
     z-index: 10000;
+
+
+    &.logo--hidden {
+      .app-bar {
+        &__logo-wrapper {
+          display: none;
+        }
+      }
+    }
   }
 
   &__navigation {
-    height: 100vh;
+    height: auto;
     position: fixed;
-    margin-top: $appBarHeight;
+    top: $appBarHeight;
+    bottom: 0;
     z-index: 1000;
     background-color: white;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+    overflow: auto;
 
-    &--open {
+    &.open {
       width: $openedNavWidth;
       transition: all $menuTransition;
     }
 
-    &--close {
+    &.close {
       width: $closedNavWidth;
       transition: all $menuTransition;
     }
@@ -40,12 +51,13 @@ body {
 
   &__content {
     width: 100%;
+    margin-top: $appBarHeight;
 
     .app-content {
-      margin-top: $appBarHeight;
+
     }
 
-    &--open {
+    &.nav-open {
       margin-left: $openedNavWidth;
       transition: all $menuTransition;
 
@@ -58,12 +70,12 @@ body {
           height: 100%;
           background-color: rgba(0, 0, 0, 0.5);
           position: fixed;
-          top: $appBarHeight;
+          top: 0;
         }
       }
     }
 
-    &--close {
+    &.nav-close {
       margin-left: $closedNavWidth;
       transition: all $menuTransition;
 
@@ -90,7 +102,7 @@ body {
   &__logo-wrapper {
     padding: 1em;
     margin-right: 2em;
-    
+
     &--hidden {
       display: none;
     }
@@ -142,62 +154,94 @@ nav {
 
 .navigation {
   margin: 0;
-  padding: 1em 0 0 0;
+  padding: 1em 0 2em 0;
 
 
   li {
     button {
+      width: 100%;
+      padding: 10px 0 10px 16px;
+      margin: 0;
       border: none;
       background-color: transparent;
-      padding-top: 10px;
-      padding-bottom: 10px;
-      margin: 0;
-      width: 100%;
       cursor: pointer;
+      text-align: left;
 
       &:hover {
         background-color: grey;
       }
     }
   }
-}
 
-.selected {
-  color: blue;
+  li {
+    &.level-1 >{
+      button {
+        span {
+          text-transform: uppercase;
+        }
+      }
+    }
 
-}
+    @for $i from 1 through 4{
+      &.level-#{$i} > {
+        button {
+          padding: 10px 10px 10px #{10 + $i*8}px;
+        }
 
-li {
-  &.level-1 >{
-    button {
-      span {
-        text-transform: uppercase;
+        a {
+          width: 100%;
+          padding: 10px 10px 10px #{10 + $i*8}px;
+          display: block;
+          box-sizing: border-box;
+          text-decoration: none;
+        }
       }
     }
   }
 
+  .nav-button {
+    .arrow {
+      width: 18px;
+      float: right;
+      transition: all 0.2s;
+    }
+
+    &.selected {
+      color: blue;
+    }
+
+    &.open {
+      .arrow {
+        width: 18px;
+        float: right;
+
+        transform: rotate(90deg);
+        transition: all 0.2s;
+      }
+    }
+  }
+
+
+  .nested-routes {
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all 0.1s;
+    transition-timing-function: ease-in-out;
+
+    &.open {
+      max-height: 4000px;
+      opacity: 1;
+      transition: all 0.3s;
+    }
+
+    ul {
+      padding: 0;
+    }
+  }
 }
 
 
-.nested-routes {
-  max-height: 0;
-  opacity: 0;
-  overflow: hidden;
-  transition: all 0.1s;
-  transition-timing-function: ease-in-out;
-
-  &--open {
-    max-height: 4000px;
-    opacity: 1;
-    transition: all 0.3s;
-
-
-  }
-
-  ul {
-    padding: 0;
-  }
-}
 
 .page {
   width: 100%;

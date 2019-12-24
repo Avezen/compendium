@@ -5,6 +5,7 @@ import {withHelmet} from "../components/HOC/withHelmet";
 
 class ReactJSPageBase extends Component {
     render() {
+
         return (
                 <div className={'react-page'}>
                     <div className={'content'}>
