@@ -7,13 +7,13 @@ import * as ReactDOM from "react-dom";
 import {Navigation, NavigationBase} from "../Navigation";
 
 
-export const NavigationItemLinkBase = ({className, item, level, selected, setSelected, path, location}) => {
+export const NavigationItemLinkBase = ({className, item, level, selected, setSelected, path, location, currentTree}) => {
     const myRef = createRef();
 
     const {label, to} = item;
 
     useEffect(() => {
-        if ('/symfony' + to === location.pathname) {
+        if (`/${currentTree}` + to === location.pathname) {
             if(JSON.stringify(selected) !== JSON.stringify(path)){
                 setSelected(path);
             }
@@ -23,7 +23,7 @@ export const NavigationItemLinkBase = ({className, item, level, selected, setSel
     return (
         <li className={`level-${level}`}>
             <Link
-                to={'/symfony' + to}
+                to={`/${currentTree}` + to}
                 ref={myRef}
                 onClick={() => {
                     setSelected(path);

@@ -5,6 +5,7 @@ import {withHelmet} from "../components/HOC/withHelmet";
 
 class ReactJSPageBase extends Component {
     render() {
+        const {data, match} = this.props;
 
         return (
                 <div className={'react-page'}>
@@ -14,6 +15,8 @@ class ReactJSPageBase extends Component {
                             <br/>
                             <FormattedMessage id="navigation.dashboard"/>
                         </div>
+                        {match.params.topic}
+
                     </div>
                 </div>
         );

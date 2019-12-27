@@ -22,21 +22,41 @@ export const GLOBAL_ROUTES = [
     messagePrefix: 'symfonyPage',
     path: `/${PUBLIC_ROUTES.SYMFONY}/:topic`,
   },
-    {
-        Component: Symfony,
-        messagePrefix: 'symfonyPage',
-        path: `/${PUBLIC_ROUTES.SYMFONY}/:topic/:example`,
-    },
+  {
+    Component: Symfony,
+    messagePrefix: 'symfonyPage',
+    path: `/${PUBLIC_ROUTES.SYMFONY}/:topic/:example`,
+  },
   {
     Component: ReactJS,
     messagePrefix: 'reactPage',
     path: `/${PUBLIC_ROUTES.REACT}`,
   },
   {
+    Component: ReactJS,
+    messagePrefix: 'reactPage',
+    path: `/${PUBLIC_ROUTES.REACT}/:topic`,
+  },
+  {
+    Component: ReactJS,
+    messagePrefix: 'reactPage',
+    path: `/${PUBLIC_ROUTES.REACT}/:topic/:example`,
+  },
+  {
     Component: CSS,
     messagePrefix: 'cssPage',
     path: `/${PUBLIC_ROUTES.CSS}`,
-  }
+  },
+  {
+    Component: CSS,
+    messagePrefix: 'cssPage',
+    path: `/${PUBLIC_ROUTES.CSS}/:topic`,
+  },
+  {
+    Component: CSS,
+    messagePrefix: 'cssPage',
+    path: `/${PUBLIC_ROUTES.CSS}/:topic/:example`,
+  },
 ];
 
 

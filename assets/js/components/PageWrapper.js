@@ -42,12 +42,12 @@ class PageWrapperBase extends Component {
 
 
     render() {
-        const {children, navigation} = this.props;
+        const {children, navigation, selectedMenu} = this.props;
 
         return (
             <MainLayout
                 appBar={<AppBar handleChange={this.handleChange}/>}
-                navigation={<Navigation navigationItems={navigation}/>}
+                navigation={<Navigation currentTree={selectedMenu} navigationItems={navigation}/>}
                 pageContent={children}
             />
         );

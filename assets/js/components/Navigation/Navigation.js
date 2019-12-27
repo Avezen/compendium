@@ -4,8 +4,9 @@ import {NavigationItem} from '../../containers/NavigationItem';
 import {useState} from "react";
 import {useEffect} from "react";
 
-export const Navigation = ({navigationItems}) => {
+export const Navigation = ({navigationItems, currentTree}) => {
     const [selected, setSelected] = useState([]);
+
 
     useEffect(() => {
         setSelected([])
@@ -20,6 +21,7 @@ export const Navigation = ({navigationItems}) => {
                     selected={selected}
                     setSelected={setSelected}
                     item={item}
+                    currentTree={currentTree}
                 />
             ))}
         </ul>
