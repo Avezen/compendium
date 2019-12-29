@@ -49,6 +49,22 @@ class MainController extends AbstractController
     }
 
     /**
+     * @Route("/react/{topic}", name="react_topic")
+     */
+    public function reactTopic()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
+     * @Route("/react/{topic}/{example}", name="react_topic_example")
+     */
+    public function reactTopicExample()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
      * @Route("/css", name="css")
      */
     public function css()

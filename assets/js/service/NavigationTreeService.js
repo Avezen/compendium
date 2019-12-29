@@ -9,8 +9,8 @@ export const fetchNavigationTree = (page) => {
                 nestedRoutes: [
                     {
                         id: 2,
-                        label: 'Factory',
-                        to: '/factory',
+                        label: 'Buttons',
+                        to: '/buttons',
                         nestedRoutes: [
                             {
                                 id: 3,
@@ -21,20 +21,13 @@ export const fetchNavigationTree = (page) => {
                     },
                     {
                         id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
+                        label: 'Carousels',
+                        to: '/carousels',
                         nestedRoutes: [
                             {
                                 id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
+                                label: 'Example2',
+                                to: '/example2'
                             }
                         ]
                     }
@@ -49,120 +42,6 @@ export const fetchNavigationTree = (page) => {
                         id: 8,
                         label: 'JWT',
                         to: '/jwt'
-                    }
-                ]
-            },
-            {
-                id: 1,
-                label: 'Patterns',
-                to: '/patterns',
-                nestedRoutes: [
-                    {
-                        id: 2,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 1,
-                label: 'Patterns',
-                to: '/patterns',
-                nestedRoutes: [
-                    {
-                        id: 2,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 1,
-                label: 'Patterns',
-                to: '/patterns',
-                nestedRoutes: [
-                    {
-                        id: 2,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
                     }
                 ]
             },
@@ -253,158 +132,6 @@ export const fetchNavigationTree = (page) => {
                         id: 8,
                         label: 'JWT',
                         to: '/jwt'
-                    }
-                ]
-            },
-            {
-                id: 1,
-                label: 'Patterns',
-                to: '/patterns',
-                nestedRoutes: [
-                    {
-                        id: 2,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 1,
-                label: 'Patterns',
-                to: '/patterns',
-                nestedRoutes: [
-                    {
-                        id: 2,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 1,
-                label: 'Patterns',
-                to: '/patterns',
-                nestedRoutes: [
-                    {
-                        id: 2,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                id: 1,
-                label: 'Patterns',
-                to: '/patterns',
-                nestedRoutes: [
-                    {
-                        id: 2,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
-                    },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
                     }
                 ]
             }
