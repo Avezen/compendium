@@ -39,7 +39,7 @@ class App extends Component {
                                     const {pathname, key} = location;
 
                                     return (
-                                        <TransitionGroup component={null}>
+                                        <TransitionGroup>
                                             <Transition
                                                 key={key}
                                                 appear={true}

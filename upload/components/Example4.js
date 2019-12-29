@@ -1,13 +1,13 @@
 import React from "react";
 
-const Example2 = () => {
+const Example4 = () => {
     return (
         <div>
             <big>
-                Example react component 2
+                Example react component 4
             </big>
         </div>
     );
 };
 
-export default Example2
+export default Example4

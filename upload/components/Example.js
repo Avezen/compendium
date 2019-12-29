@@ -4,7 +4,7 @@ const Example = () => {
     return (
         <div>
             <big>
-                Example
+                Example react component
             </big>
         </div>
     );

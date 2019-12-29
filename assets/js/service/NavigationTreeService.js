@@ -46,38 +46,31 @@ export const fetchNavigationTree = (page) => {
                 ]
             },
             {
-                id: 1,
+                id: 9,
                 label: 'Patterns',
                 to: '/patterns',
                 nestedRoutes: [
                     {
-                        id: 2,
+                        id: 10,
                         label: 'Factory',
                         to: '/factory',
                         nestedRoutes: [
                             {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
+                                id: 11,
+                                label: 'Example3',
+                                to: '/example3'
                             }
                         ]
                     },
                     {
-                        id: 4,
+                        id: 12,
                         label: 'Strategy',
                         to: '/strategy',
                         nestedRoutes: [
                             {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
+                                id: 13,
+                                label: 'Example4',
+                                to: '/example4'
                             }
                         ]
                     }

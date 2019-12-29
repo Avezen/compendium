@@ -1,13 +1,13 @@
 import React from "react";
 
-const Example2 = () => {
+const Jwt = () => {
     return (
         <div>
             <big>
-                Example react component 2
+                Example react component JWT
             </big>
         </div>
     );
 };
 
-export default Example2
+export default Jwt
