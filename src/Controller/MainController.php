@@ -2,9 +2,17 @@
 
 namespace App\Controller;
 
-use App\Factory\Example\ExampleFactory;
+use App\Factory\ExampleTest\ExampleTestFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\HeaderUtils;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Json;
+use ZipArchive;
+
 
 class MainController extends AbstractController
 {
@@ -65,6 +73,14 @@ class MainController extends AbstractController
     }
 
     /**
+     * @Route("/react/{category}/{subcategory}/{topic}", name="react_subcategory_topic_example")
+     */
+    public function reactSubcategoryTopicExample()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
      * @Route("/css", name="css")
      */
     public function css()
@@ -74,15 +90,84 @@ class MainController extends AbstractController
 
     /**
      * @Route("/factory", name="factory")
-     * @param ExampleFactory $exampleFactory
+     * @param ExampleTestFactory $exampleTestFactory
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function factory(ExampleFactory $exampleFactory)
+    public function factory(ExampleTestFactory $exampleTestFactory)
     {
-        $example = $exampleFactory->getVariant('example');
+        $example = $exampleTestFactory->getVariant('exampleTest');
 
-        $example->exampleFunction(true);
+        $example->exampleTestFunction(true);
         die;
         return $this->render('main/index.html.twig');
+    }
+
+
+    /**
+     * @Route("/test/{id}/{fdf}/{dsds}", name="test")
+     */
+    public function test()
+    {
+        $finder = new Finder();
+
+        $finder->files()->in('../upload/symfony/pattern/factory');
+
+        if ($finder->hasResults()) {
+
+            $txt = [];
+            foreach ($finder as $file) {
+                $absoluteFilePath = $file->getRealPath();
+                $fileNameWithExtension = $file->getRelativePathname();
+
+                $txt[$fileNameWithExtension] = file_get_contents($absoluteFilePath);
+            }
+
+            return new JsonResponse([
+                'files' => $txt
+            ]);
+        }
+
+        return new JsonResponse([
+            'files' => []
+        ]);
+    }
+
+    /**
+     * @Route("/test2", name="test2")
+     */
+    public function test2()
+    {
+        $finder = new Finder();
+
+        $finder->files()->in('../upload/symfony/pattern/factory');
+
+        if ($finder->hasResults()) {
+            $zip = new ZipArchive();
+
+            $zipName = 'zip.zip';
+
+            $zip->open($zipName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
+
+            foreach ($finder as $file) {
+                $absoluteFilePath = $file->getRealPath();
+                $fileNameWithExtension = $file->getRelativePathname();
+
+                $zip->addFile($absoluteFilePath, $fileNameWithExtension);
+            }
+            $zip->close();
+
+            $response = new BinaryFileResponse($zipName);
+
+            $disposition = HeaderUtils::makeDisposition(
+                HeaderUtils::DISPOSITION_ATTACHMENT,
+                $zipName
+            );
+
+            $response->headers->set('Content-Disposition', $disposition);
+
+            return $response;
+        }
+
+        return null;
     }
 }

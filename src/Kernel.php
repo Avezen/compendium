@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Compiler\ExamplePass;
+use App\Compiler\ExampleTestFactoryPass;
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\Config\Loader\LoaderInterface;
 use Symfony\Component\Config\Resource\FileResource;
@@ -18,7 +18,7 @@ class Kernel extends BaseKernel
 
     protected function build(ContainerBuilder $container)
     {
-        $container->addCompilerPass(new ExamplePass());
+        $container->addCompilerPass(new ExampleTestFactoryPass());
     }
 
     public function registerBundles(): iterable

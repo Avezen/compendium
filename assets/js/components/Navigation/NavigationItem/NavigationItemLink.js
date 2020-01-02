@@ -7,14 +7,13 @@ import * as ReactDOM from "react-dom";
 import {Navigation, NavigationBase} from "../Navigation";
 
 
-export const NavigationItemLinkBase = ({className, item, level, selected, setSelected, path, location, currentTree}) => {
+export const NavigationItemLinkBase = ({className, item, level, selected, setSelected, path, urlPath, location, currentTree}) => {
     const myRef = createRef();
-
-    const {label, to} = item;
+    const {label} = item;
 
     useEffect(() => {
-        if (`/${currentTree}` + to === location.pathname) {
-            if(JSON.stringify(selected) !== JSON.stringify(path)){
+        if (`/${currentTree + urlPath}` === location.pathname) {
+            if (JSON.stringify(selected) !== JSON.stringify(path)) {
                 setSelected(path);
             }
         }
@@ -23,7 +22,7 @@ export const NavigationItemLinkBase = ({className, item, level, selected, setSel
     return (
         <li className={`level-${level}`}>
             <Link
-                to={`/${currentTree}` + to}
+                to={`/${currentTree + urlPath}`}
                 ref={myRef}
                 onClick={() => {
                     setSelected(path);

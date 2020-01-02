@@ -15,6 +15,7 @@ import {exit, play} from "./service/Animate";
 import {store} from "./store";
 import {Provider} from "react-redux";
 import {PageWrapper} from "./components/PageWrapper";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
@@ -25,7 +26,7 @@ class App extends Component {
                     key={key}
                     exact
                     path={path}
-                    render={() => <Component {...props} />}
+                    render={(routerProps) => <Component {...props} {...routerProps}/>}
                 />
         );
 

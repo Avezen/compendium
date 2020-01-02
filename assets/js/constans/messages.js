@@ -8,6 +8,9 @@ export const messages = {
         navigation: {
             dashboard: 'en',
         },
+        homePage: {
+            pageTitle: "Home"
+        },
         cssPage: {
             pageTitle: "CSS"
         },

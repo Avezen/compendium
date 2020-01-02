@@ -18,7 +18,7 @@ export function withData(
           this.setState(
               {isLoading: true, fetchedData: []},
               () =>
-                  fetchData()
+                  fetchData(this.props.match.url)
                       .then(
                           this.onFetchSuccess,
                           this.onFetchFailure
@@ -26,7 +26,7 @@ export function withData(
           );
       };
 
-      onFetchSuccess = (data) => {
+      onFetchSuccess = ({data}) => {
           const fetchedData = (data || []);
 
           this.setState({fetchedData, isLoading: false});

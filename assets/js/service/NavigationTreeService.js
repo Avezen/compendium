@@ -5,12 +5,14 @@ export const fetchNavigationTree = (page) => {
             {
                 id: 1,
                 label: 'Components',
-                to: '/components',
+                to: '/component',
+                category: true,
                 nestedRoutes: [
                     {
                         id: 2,
                         label: 'Buttons',
-                        to: '/buttons',
+                        to: '/button',
+                        category: true,
                         nestedRoutes: [
                             {
                                 id: 3,
@@ -22,7 +24,7 @@ export const fetchNavigationTree = (page) => {
                     {
                         id: 4,
                         label: 'Carousels',
-                        to: '/carousels',
+                        to: '/carousel',
                         nestedRoutes: [
                             {
                                 id: 5,
@@ -36,7 +38,8 @@ export const fetchNavigationTree = (page) => {
             {
                 id: 7,
                 label: 'Functions',
-                to: '/functions',
+                to: '/function',
+                category: true,
                 nestedRoutes: [
                     {
                         id: 8,
@@ -48,7 +51,8 @@ export const fetchNavigationTree = (page) => {
             {
                 id: 9,
                 label: 'Patterns',
-                to: '/patterns',
+                to: '/pattern',
+                category: true,
                 nestedRoutes: [
                     {
                         id: 10,
@@ -81,38 +85,18 @@ export const fetchNavigationTree = (page) => {
             {
                 id: 1,
                 label: 'Patterns',
-                to: '/patterns',
+                to: '/pattern',
+                category: true,
                 nestedRoutes: [
                     {
                         id: 2,
                         label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 3,
-                                label: 'Example',
-                                to: '/example'
-                            }
-                        ]
+                        to: '/factory'
                     },
                     {
                         id: 4,
                         label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 5,
-                                label: 'Example',
-                                to: '/example',
-                                nestedRoutes: [
-                                    {
-                                        id: 6,
-                                        label: 'Example2',
-                                        to: '/example2'
-                                    }
-                                ]
-                            }
-                        ]
+                        to: '/strategy'
                     }
                 ]
             },
@@ -120,6 +104,7 @@ export const fetchNavigationTree = (page) => {
                 id: 7,
                 label: 'Security',
                 to: '/security',
+                category: true,
                 nestedRoutes: [
                     {
                         id: 8,

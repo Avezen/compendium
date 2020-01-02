@@ -9,12 +9,12 @@
 namespace App\Compiler;
 
 
-use App\Factory\Example\ExampleFactory;
+use App\Factory\ExampleTest\ExampleTestFactory;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
-class ExamplePass implements CompilerPassInterface
+class ExampleTestFactoryPass implements CompilerPassInterface
 {
 
     /**
@@ -23,14 +23,14 @@ class ExamplePass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has(ExampleFactory::class)) {
+        if (!$container->has(ExampleTestFactory::class)) {
             return;
         }
 
-        $definition = $container->findDefinition(ExampleFactory::class);
+        $definition = $container->findDefinition(ExampleTestFactory::class);
 
         // find all service IDs with the app.mail_transport tag
-        $taggedServices = $container->findTaggedServiceIds('app.example');
+        $taggedServices = $container->findTaggedServiceIds('app.exampleTest');
 
         foreach ($taggedServices as $id => $tags) {
 

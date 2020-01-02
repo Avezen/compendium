@@ -3,13 +3,14 @@ import {FormattedMessage} from "react-intl";
 import {withRouter} from "react-router-dom";
 import {withHelmet} from "../components/HOC/withHelmet";
 import {withData} from "../components/HOC/withData";
-import {fetchPostsIfNeeded, invalidateSubreddit, selectSubreddit} from "../store/actions/fetchNavigation";
-import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {fetchSymfony} from "../service/SymfonyService";
+import {fetchPage} from "../service/Api";
+import {darcula} from "react-syntax-highlighter/dist/esm/styles/prism";
+import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
+import {Col, Row} from "react-bootstrap";
+
+
 
 export class SymfonyPageBase extends Component {
-
 
     render() {
         const {data, match} = this.props;
@@ -23,6 +24,19 @@ export class SymfonyPageBase extends Component {
                         <FormattedMessage id="navigation.dashboard"/>
                         <br/>
                         {match.params.topic}
+
+                        {data && data.files && Object.keys(data.files).map((item, key) => (
+                            <Row key={key} bsPrefix={'row m-0'}>
+                                <Col lg={6}>
+
+                                </Col>
+                                <Col lg={6}>
+                                    <SyntaxHighlighter language="php" style={darcula}>
+                                        {data.files[item]}
+                                    </SyntaxHighlighter>
+                                </Col>
+                            </Row>
+                        ))}
                     </div>
                 </div>
             </div>
@@ -31,15 +45,11 @@ export class SymfonyPageBase extends Component {
 }
 
 
-
 export const SymfonyPageWithHelmet = withHelmet(SymfonyPageBase);
-export const SymfonyWithRouter = withRouter(SymfonyPageWithHelmet);
-
-
 
 export const Symfony = withData(
-    SymfonyWithRouter,
-    (fetchData) => fetchSymfony()
+    SymfonyPageWithHelmet,
+    fetchPage
 );
 
 

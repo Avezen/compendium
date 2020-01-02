@@ -3,15 +3,22 @@ import {NestedNavigationItem} from "../components/Navigation/NavigationItem/Nest
 import {NavigationItemLink} from "../components/Navigation/NavigationItem/NavigationItemLink";
 
 
-export const NavigationItem = ({className, item, level, selected, setSelected, currentPath, currentTree}) => {
+export const NavigationItem = ({className, item, level, selected, setSelected, currentPath, currentUrlPath, currentTree}) => {
     level++;
 
     let path = [];
+    let urlPath = '';
 
     if (currentPath) {
         path = ([...currentPath, item.id]);
     } else {
         path.push(item.id);
+    }
+
+    if (currentUrlPath) {
+        urlPath = currentUrlPath + item.to;
+    } else {
+        urlPath = item.to;
     }
 
     if (item.nestedRoutes && item.nestedRoutes.length > 0) {
@@ -22,6 +29,7 @@ export const NavigationItem = ({className, item, level, selected, setSelected, c
                 selected={selected}
                 setSelected={setSelected}
                 path={path}
+                urlPath={urlPath}
                 currentTree={currentTree}
             />
         );
@@ -33,6 +41,7 @@ export const NavigationItem = ({className, item, level, selected, setSelected, c
                 selected={selected}
                 setSelected={setSelected}
                 path={path}
+                urlPath={urlPath}
                 currentTree={currentTree}
             />
         );

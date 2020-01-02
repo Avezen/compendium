@@ -4,7 +4,7 @@ import {NavigationItem} from "../../../containers/NavigationItem";
 import {useEffect} from "react";
 
 
-export const NestedNavigationItem = ({className, item, level, selected, setSelected, path, currentTree}) => {
+export const NestedNavigationItem = ({className, item, level, selected, setSelected, path, urlPath, currentTree}) => {
 
     const [open, setOpen] = useState(false);
 
@@ -50,6 +50,7 @@ export const NestedNavigationItem = ({className, item, level, selected, setSelec
                             selected={selected}
                             setSelected={setSelected}
                             currentPath={path}
+                            currentUrlPath={urlPath}
                             currentTree={currentTree}
                         />
                     ))}

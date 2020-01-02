@@ -26,10 +26,10 @@ services:
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
-    App\Factory\Example\Example:
-        class: App\Factory\Example\Example
+    App\Factory\ExampleTest\ExampleTest:
+        class: App\Factory\ExampleTest\ExampleTest
         #        arguments:
         #            $em: "@doctrine.orm.entity_manager"
         public: true
         tags:
-            - { name: 'app.example', alias: 'example' }
+            - { name: 'app.exampleTest', alias: 'exampleTest' }

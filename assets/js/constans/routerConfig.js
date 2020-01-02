@@ -20,12 +20,12 @@ export const GLOBAL_ROUTES = [
   {
     Component: Symfony,
     messagePrefix: 'symfonyPage',
-    path: `/${PUBLIC_ROUTES.SYMFONY}/:topic`,
+    path: `/${PUBLIC_ROUTES.SYMFONY}/:category`,
   },
   {
     Component: Symfony,
     messagePrefix: 'symfonyPage',
-    path: `/${PUBLIC_ROUTES.SYMFONY}/:topic/:example`,
+    path: `/${PUBLIC_ROUTES.SYMFONY}/:category/:topic`,
   },
   {
     Component: ReactJS,
@@ -35,12 +35,17 @@ export const GLOBAL_ROUTES = [
   {
     Component: ReactJS,
     messagePrefix: 'reactPage',
-    path: `/${PUBLIC_ROUTES.REACT}/:topic`,
+    path: `/${PUBLIC_ROUTES.REACT}/:category`,
   },
   {
     Component: ReactJS,
     messagePrefix: 'reactPage',
-    path: `/${PUBLIC_ROUTES.REACT}/:topic/:example`,
+    path: `/${PUBLIC_ROUTES.REACT}/:category/:topic`,
+  },
+  {
+    Component: ReactJS,
+    messagePrefix: 'reactPage',
+    path: `/${PUBLIC_ROUTES.REACT}/:category/:subcategory/:topic`,
   },
   {
     Component: CSS,
@@ -50,12 +55,12 @@ export const GLOBAL_ROUTES = [
   {
     Component: CSS,
     messagePrefix: 'cssPage',
-    path: `/${PUBLIC_ROUTES.CSS}/:topic`,
+    path: `/${PUBLIC_ROUTES.CSS}/:category`,
   },
   {
     Component: CSS,
     messagePrefix: 'cssPage',
-    path: `/${PUBLIC_ROUTES.CSS}/:topic/:example`,
+    path: `/${PUBLIC_ROUTES.CSS}/:category/:topic`,
   },
 ];
 

@@ -6,10 +6,10 @@
  * Time: 12:57
  */
 
-namespace App\Factory\Example;
+namespace App\Factory\ExampleTest;
 
 
-class ExampleFactory
+class ExampleTestFactory
 {
     private $variants;
 
@@ -18,7 +18,7 @@ class ExampleFactory
         $this->variants = [];
     }
 
-    public function addVariant(ExampleFactoryInterface $variant, $alias)
+    public function addVariant(ExampleTestFactoryInterface $variant, $alias)
     {
         $this->variants[$alias] = $variant;
     }
