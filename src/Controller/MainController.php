@@ -2,16 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Type;
 use App\Factory\ExampleTest\ExampleTestFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Finder\Finder;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
-use Symfony\Component\HttpFoundation\HeaderUtils;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Json;
-use ZipArchive;
 
 
 class MainController extends AbstractController
@@ -20,6 +15,14 @@ class MainController extends AbstractController
      * @Route("/", name="home")
      */
     public function index()
+    {
+        return $this->render('main/index.html.twig');
+    }
+
+    /**
+     * @Route("/admin", name="admin")
+     */
+    public function admin()
     {
         return $this->render('main/index.html.twig');
     }
@@ -102,72 +105,21 @@ class MainController extends AbstractController
         return $this->render('main/index.html.twig');
     }
 
-
     /**
-     * @Route("/test/{id}/{fdf}/{dsds}", name="test")
+     * @Route("/route", name="route")
+     * @param ExampleTestFactory $exampleTestFactory
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function test()
+    public function route(ExampleTestFactory $exampleTestFactory)
     {
-        $finder = new Finder();
+        $em = $this->getDoctrine()->getManager();
 
-        $finder->files()->in('../upload/symfony/pattern/factory');
+        $s = $em->getRepository(Type::class)->find(1);
 
-        if ($finder->hasResults()) {
-
-            $txt = [];
-            foreach ($finder as $file) {
-                $absoluteFilePath = $file->getRealPath();
-                $fileNameWithExtension = $file->getRelativePathname();
-
-                $txt[$fileNameWithExtension] = file_get_contents($absoluteFilePath);
-            }
-
-            return new JsonResponse([
-                'files' => $txt
-            ]);
-        }
-
-        return new JsonResponse([
-            'files' => []
-        ]);
+        dump($s);
+        dump($s->getRoutePaths()->toArray());
+        die;
+        return $this->render('main/index.html.twig');
     }
 
-    /**
-     * @Route("/test2", name="test2")
-     */
-    public function test2()
-    {
-        $finder = new Finder();
-
-        $finder->files()->in('../upload/symfony/pattern/factory');
-
-        if ($finder->hasResults()) {
-            $zip = new ZipArchive();
-
-            $zipName = 'zip.zip';
-
-            $zip->open($zipName, ZipArchive::CREATE | ZipArchive::OVERWRITE);
-
-            foreach ($finder as $file) {
-                $absoluteFilePath = $file->getRealPath();
-                $fileNameWithExtension = $file->getRelativePathname();
-
-                $zip->addFile($absoluteFilePath, $fileNameWithExtension);
-            }
-            $zip->close();
-
-            $response = new BinaryFileResponse($zipName);
-
-            $disposition = HeaderUtils::makeDisposition(
-                HeaderUtils::DISPOSITION_ATTACHMENT,
-                $zipName
-            );
-
-            $response->headers->set('Content-Disposition', $disposition);
-
-            return $response;
-        }
-
-        return null;
-    }
 }

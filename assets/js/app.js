@@ -19,6 +19,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
+
+    componentDidMount() {
+        console.log('dsds');
+    }
+
+
     render() {
         const routeComponents = GLOBAL_ROUTES.map(
             ({Component, path, ...props}, key) =>
@@ -50,6 +56,14 @@ class App extends Component {
                                             >
                                                 <Switch location={location}>
                                                     {routeComponents}
+                                                    <Route
+                                                        exact={true}
+                                                        path='/login'
+                                                        component={() => {
+                                                            window.location.href = ('http://127.0.0.1:8000/login');
+                                                            return null;
+                                                        }}
+                                                    />
                                                 </Switch>
                                             </Transition>
                                         </TransitionGroup>

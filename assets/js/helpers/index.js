@@ -6,3 +6,11 @@ export const cutToFirstOccurrence = (string, mark) => {
     else
         return string;
 };
+
+export const isObjectEmpty = (obj) => {
+    for(let key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+};

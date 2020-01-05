@@ -80,7 +80,7 @@ export const PageWrapper = connect(
 
 PageWrapperBase.propTypes = {
     selectedMenu: PropTypes.string.isRequired,
-    navigation: PropTypes.array.isRequired,
+    navigation: PropTypes.array,
     isFetching: PropTypes.bool.isRequired,
     lastUpdated: PropTypes.number,
     dispatch: PropTypes.func.isRequired

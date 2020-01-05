@@ -1,6 +1,5 @@
 import * as React from 'react';
 import {navigationItems} from "../../constans/navigation";
-import MenuLink from "../../containers/MenuLink";
 import {MenuItem} from "./MenuItem/MenuItem";
 
 

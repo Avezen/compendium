@@ -29,6 +29,8 @@ export function withData(
       onFetchSuccess = ({data}) => {
           const fetchedData = (data || []);
 
+          console.log(fetchedData);
+
           this.setState({fetchedData, isLoading: false});
       };
 

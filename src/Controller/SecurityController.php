@@ -16,9 +16,9 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-        // if ($this->getUser()) {
-        //     return $this->redirectToRoute('target_path');
-        // }
+         if ($this->getUser()) {
+             return $this->redirectToRoute('home');
+         }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -34,5 +34,27 @@ class SecurityController extends AbstractController
     public function logout()
     {
         throw new \Exception('This method can be blank - it will be intercepted by the logout key on your firewall');
+    }
+
+    /**
+     * @Route("/api/is-authenticated", name="app_is_authenticated")
+     * @param AuthenticationUtils $authenticationUtils
+     * @return Response
+     */
+    public function isAuthenticated(AuthenticationUtils $authenticationUtils): Response
+    {
+//         if ($this->getUser()) {
+//             return $this->redirectToRoute('target_path');
+//         }
+
+         dump($this->getUser());
+         die;
+
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
     }
 }

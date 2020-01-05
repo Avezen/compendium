@@ -12,5 +12,9 @@ export const navigationItems = [
   {
     label: 'css',
     to: `/${PUBLIC_ROUTES.CSS}`,
+  },
+  {
+    label: 'login',
+    to: `/login`,
   }
 ];
