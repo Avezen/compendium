@@ -46,3 +46,17 @@ export const exit = (node) => {
     timeline.to(node, 0.15, { autoAlpha: 0, ease: Power1.easeOut });
     timeline.play();
 };
+
+
+export const animateModal = (node, appears) => {
+    const delay = appears ? 0 : 0.5;
+
+    const timeline = new Timeline({ paused: true });
+    const modal = node.querySelectorAll('.login-modal');
+
+    timeline
+        .from(node, 0.3, { display: 'block', autoAlpha: 0, delay, ease: Power1.easeIn })
+        .from(modal, 0.15, { autoAlpha: 0, y: 25, ease: Power1.easeInOut });
+
+    requestAnimationFrame(() => timeline.play())
+};

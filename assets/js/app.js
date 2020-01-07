@@ -19,12 +19,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
 
-
-    componentDidMount() {
-        console.log('dsds');
-    }
-
-
     render() {
         const routeComponents = GLOBAL_ROUTES.map(
             ({Component, path, ...props}, key) =>

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -16,9 +17,9 @@ class SecurityController extends AbstractController
      */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
-         if ($this->getUser()) {
-             return $this->redirectToRoute('home');
-         }
+        if ($this->getUser()) {
+            return $this->redirectToRoute('home');
+        }
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
@@ -39,16 +40,19 @@ class SecurityController extends AbstractController
     /**
      * @Route("/api/is-authenticated", name="app_is_authenticated")
      * @param AuthenticationUtils $authenticationUtils
-     * @return Response
+     * @return JsonResponse
      */
-    public function isAuthenticated(AuthenticationUtils $authenticationUtils): Response
+    public function isAuthenticated(AuthenticationUtils $authenticationUtils): JsonResponse
     {
 //         if ($this->getUser()) {
 //             return $this->redirectToRoute('target_path');
 //         }
 
-         dump($this->getUser());
-         die;
+        return new JsonResponse(
+            [
+                "success" => $this->getUser()
+            ]
+        );
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

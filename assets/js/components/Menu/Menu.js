@@ -1,13 +1,13 @@
 import * as React from 'react';
-import {navigationItems} from "../../constans/navigation";
+import {menuItems} from "../../constans/menu";
 import {MenuItem} from "./MenuItem/MenuItem";
 
 
-export const Menu = ({handleChange}) => {
+export const Menu = ({handleChange, menuItems}) => {
 
     return (
         <ul className={'menu'}>
-            {navigationItems.map((item, key) => (
+            {menuItems.map((item, key) => (
                 <MenuItem
                     key={key}
                     technology={item.label.toUpperCase()}

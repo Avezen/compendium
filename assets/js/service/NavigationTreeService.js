@@ -48,38 +48,38 @@ export const fetchNavigationTree = (page) => {
                     }
                 ]
             },
-            {
-                id: 9,
-                label: 'Patterns',
-                to: '/pattern',
-                category: true,
-                nestedRoutes: [
-                    {
-                        id: 10,
-                        label: 'Factory',
-                        to: '/factory',
-                        nestedRoutes: [
-                            {
-                                id: 11,
-                                label: 'Example3',
-                                to: '/example3'
-                            }
-                        ]
-                    },
-                    {
-                        id: 12,
-                        label: 'Strategy',
-                        to: '/strategy',
-                        nestedRoutes: [
-                            {
-                                id: 13,
-                                label: 'Example4',
-                                to: '/example4'
-                            }
-                        ]
-                    }
-                ]
-            }
+            // {
+            //     id: 9,
+            //     label: 'Patterns',
+            //     to: '/pattern',
+            //     category: true,
+            //     nestedRoutes: [
+            //         {
+            //             id: 10,
+            //             label: 'Factory',
+            //             to: '/factory',
+            //             nestedRoutes: [
+            //                 {
+            //                     id: 11,
+            //                     label: 'Example3',
+            //                     to: '/example3'
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             id: 12,
+            //             label: 'Strategy',
+            //             to: '/strategy',
+            //             nestedRoutes: [
+            //                 {
+            //                     id: 13,
+            //                     label: 'Example4',
+            //                     to: '/example4'
+            //                 }
+            //             ]
+            //         }
+            //     ]
+            // }
         ],
         symfony: [
             {
@@ -93,11 +93,11 @@ export const fetchNavigationTree = (page) => {
                         label: 'Factory',
                         to: '/factory'
                     },
-                    {
-                        id: 4,
-                        label: 'Strategy',
-                        to: '/strategy'
-                    }
+                    // {
+                    //     id: 4,
+                    //     label: 'Strategy',
+                    //     to: '/strategy'
+                    // }
                 ]
             },
             {

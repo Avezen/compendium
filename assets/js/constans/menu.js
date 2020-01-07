@@ -1,6 +1,6 @@
 import {PRIVATE_ROUTES, PUBLIC_ROUTES} from './routes';
 
-export const navigationItems = [
+export const menuItems = [
   {
     label: 'symfony',
     to: `/${PUBLIC_ROUTES.SYMFONY}`
@@ -12,9 +12,5 @@ export const navigationItems = [
   {
     label: 'css',
     to: `/${PUBLIC_ROUTES.CSS}`,
-  },
-  {
-    label: 'login',
-    to: `/login`,
   }
 ];

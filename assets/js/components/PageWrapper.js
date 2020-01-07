@@ -11,6 +11,8 @@ import {withRouter} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import * as PropTypes from "prop-types";
 import {cutToFirstOccurrence} from "../helpers";
+import {menuItems} from "../constans/menu";
+import {login} from "../service/Api";
 
 
 class PageWrapperBase extends Component {
@@ -41,13 +43,24 @@ class PageWrapperBase extends Component {
     };
 
 
+
     render() {
         const {children, navigation, selectedMenu} = this.props;
 
         return (
             <MainLayout
-                appBar={<AppBar handleChange={this.handleChange}/>}
-                navigation={<Navigation currentTree={selectedMenu} navigationItems={navigation}/>}
+                appBar={
+                    <AppBar
+                        menuItems={menuItems}
+                        handleChange={this.handleChange}
+                    />
+                }
+                navigation={
+                    <Navigation
+                        currentTree={selectedMenu}
+                        navigationItems={navigation}
+                    />
+                }
                 pageContent={children}
             />
         );
