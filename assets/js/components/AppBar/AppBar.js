@@ -5,7 +5,7 @@ import {Menu} from "../Menu/Menu";
 import LoginForm from "../LoginForm/LoginForm";
 import {isAuthenticated, logout} from "../../service/Api";
 
-export const AppBar = ({menuItems, handleChange, authenticatedUser}) => {
+export const AppBar = ({menuItems, handleChange, authenticatedUser, logoutUser}) => {
 
     const [formOpen, setFormOpen] = useState(false);
 
@@ -26,10 +26,12 @@ export const AppBar = ({menuItems, handleChange, authenticatedUser}) => {
                 />
             </nav>
 
-            {authenticatedUser ?
+
+
+            {authenticatedUser.isFetching ? (<div>loading</div>) : authenticatedUser.user ?
                 (
                     <div className={'app-bar__button-wrapper'}>
-                        <button onClick={() => {logout()}} className={'button button--login'}>
+                        <button onClick={() => {logoutUser()}} className={'button button--login'}>
                     <span>
                         Log Out
                     </span>

@@ -3,6 +3,7 @@ import {Home} from "../pages/Home";
 import {ReactJS} from "../pages/ReactJS";
 import {CSS} from "../pages/CSS";
 import {Symfony} from "../pages/Symfony";
+import {Admin} from "../pages/Admin";
 
 export const DEFAULT_ROUTE = `/${PUBLIC_ROUTES.MAIN}`;
 
@@ -62,6 +63,11 @@ export const GLOBAL_ROUTES = [
     messagePrefix: 'cssPage',
     path: `/${PUBLIC_ROUTES.CSS}/:category/:topic`,
   },
+  {
+    Component: Admin,
+    messagePrefix: 'adminPage',
+    path: `/${PRIVATE_ROUTES.ADMIN}`,
+  }
 ];
 
 

@@ -13,21 +13,27 @@ import * as PropTypes from "prop-types";
 import {adminMenuItems, menuItems} from "../constans/menu";
 import {fetchAuthenticatedUser} from "../store/actions/authentication";
 import {isObjectEmpty} from "../helpers";
+import {logout} from "../service/Api";
 
 
 class PageWrapperBase extends Component {
 
     componentDidMount() {
-        const {selectMenuItem, fetchNavigationIfNeeded, fetchAuthenticatedUser, authenticatedUser} = this.props;
+        const {selectMenuItem, fetchNavigationIfNeeded, fetchAuthenticatedUser} = this.props;
 
         let selectedMenu = this.props.location.pathname.split('/')[1];
 
         selectMenuItem(selectedMenu);
         fetchNavigationIfNeeded(selectedMenu);
         fetchAuthenticatedUser();
-
-        console.log(authenticatedUser);
     }
+
+    logoutUser = () => {
+        const {fetchAuthenticatedUser} = this.props;
+        logout().then(
+            fetchAuthenticatedUser()
+        );
+    };
 
     handleChange = selectedMenu => {
         const {selectMenuItem, fetchNavigationIfNeeded} = this.props;
@@ -52,13 +58,14 @@ class PageWrapperBase extends Component {
 
         return (
             <React.Fragment>
-                {!isObjectEmpty(authenticatedUser.user) ? (
+                {authenticatedUser.user ? (
                     <MainLayout
                         appBar={
                             <AppBar
                                 menuItems={adminMenuItems}
                                 handleChange={this.handleChange}
                                 authenticatedUser={authenticatedUser}
+                                logoutUser={this.logoutUser}
                             />
                         }
                         navigation={
@@ -75,6 +82,8 @@ class PageWrapperBase extends Component {
                             <AppBar
                                 menuItems={menuItems}
                                 handleChange={this.handleChange}
+                                authenticatedUser={authenticatedUser}
+                                logoutUser={this.logoutUser}
                             />
                         }
                         navigation={

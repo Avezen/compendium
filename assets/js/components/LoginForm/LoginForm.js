@@ -33,10 +33,13 @@ class LoginForm extends Component {
     };
 
     onAuthenticationSuccess = ({data}) => {
+        const {fetchAuthenticatedUser, authenticatedUser} = this.props;
         const user = (data.success || null);
 
         this.setState({user, isLoading: false}, () => {
-            this.props.fetchAuthenticatedUser();
+            fetchAuthenticatedUser();
+
+            console.log(authenticatedUser);
 
             setTimeout(() => {
                 this.closeForm();
@@ -46,9 +49,12 @@ class LoginForm extends Component {
     };
 
     onAuthenticationFailure = ({response}) => {
+        const {fetchAuthenticatedUser} = this.props;
+
         const error = (response.data.error || null);
 
-        this.props.fetchAuthenticatedUser();
+        fetchAuthenticatedUser();
+
         this.setState({
             error,
             isLoading: false,

@@ -1,4 +1,5 @@
 import {IS_AUTHENTICATED, REQUEST_USER, RECEIVE_USER} from "../actions/authentication";
+import {isObjectEmpty} from "../../helpers";
 
 
 
@@ -10,7 +11,6 @@ const user = (
     },
     action
 ) => {
-    console.log(action.user);
     switch (action.type) {
         case REQUEST_USER:
             return Object.assign({}, state, {
@@ -21,7 +21,7 @@ const user = (
             return Object.assign({}, state, {
                 isFetching: false,
                 didInvalidate: false,
-                user: action.user,
+                user: isObjectEmpty(action.user) ? null : action.user,
             });
         default:
             return state

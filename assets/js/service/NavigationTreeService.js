@@ -113,6 +113,14 @@ export const fetchNavigationTree = (page) => {
                     }
                 ]
             }
+        ],
+        admin: [
+            {
+                id: 1,
+                label: 'Patterns',
+                to: '/pattern',
+                category: true,
+            }
         ]
     };
 

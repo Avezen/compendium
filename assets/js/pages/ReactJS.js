@@ -3,9 +3,16 @@ import {withRouter} from "react-router-dom";
 import {FormattedMessage} from "react-intl";
 import {withHelmet} from "../components/HOC/withHelmet";
 import {exampleComponents} from "../constans/exampleComponents";
-import Example from "../constans/exampleComponents";
+import {connect} from "react-redux";
+import {fetchNavigationIfNeeded, selectMenuItem} from "../store/actions/fetchNavigation";
 
 class ReactJSPageBase extends Component {
+
+    componentDidMount() {
+        this.props.selectMenuItem('react')
+    }
+
+
     render() {
         const {data, match} = this.props;
 
@@ -30,4 +37,11 @@ class ReactJSPageBase extends Component {
 }
 
 export const ReactJSPageWithHelmet = withHelmet(ReactJSPageBase);
-export const ReactJS = withRouter(ReactJSPageWithHelmet);
+export const ReactJSWithRouter = withRouter(ReactJSPageWithHelmet);
+
+const mapDispatchToProps = dispatch => {
+    return {
+        selectMenuItem: selectedMenu => dispatch(selectMenuItem(selectedMenu)),
+    };
+};
+export const ReactJS = connect(null, mapDispatchToProps)(ReactJSWithRouter);

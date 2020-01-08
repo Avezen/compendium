@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {FormattedMessage} from "react-intl";
 import {withHelmet} from "../components/HOC/withHelmet";
 import {withData} from "../components/HOC/withData";
 import {fetchPage} from "../service/Api";
@@ -7,9 +6,16 @@ import {darcula} from "react-syntax-highlighter/dist/esm/styles/prism";
 import {Prism as SyntaxHighlighter} from "react-syntax-highlighter";
 import {Col, Row} from "react-bootstrap";
 import {isObjectEmpty} from "../helpers";
+import {selectMenuItem} from "../store/actions/fetchNavigation";
+import {connect} from "react-redux";
 
 
 export class SymfonyPageBase extends Component {
+
+    componentDidMount() {
+        this.props.selectMenuItem('symfony')
+    }
+
 
     render() {
         const {data, match} = this.props;
@@ -107,9 +113,15 @@ export class SymfonyPageBase extends Component {
 
 export const SymfonyPageWithHelmet = withHelmet(SymfonyPageBase);
 
-export const Symfony = withData(
+export const SymfonyWithData = withData(
     SymfonyPageWithHelmet,
     fetchPage
 );
 
+const mapDispatchToProps = dispatch => {
+    return {
+        selectMenuItem: selectedMenu => dispatch(selectMenuItem(selectedMenu)),
+    };
+};
+export const Symfony = connect(null, mapDispatchToProps)(SymfonyWithData);
 

@@ -30,6 +30,6 @@ export const adminMenuItems = [
   },
   {
     label: 'admin',
-    to: `/admin`,
+    to: `${PRIVATE_ROUTES.ADMIN}`,
   }
 ];
