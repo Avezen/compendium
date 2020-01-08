@@ -5,10 +5,9 @@ import {Menu} from "../Menu/Menu";
 import LoginForm from "../LoginForm/LoginForm";
 import {isAuthenticated, logout} from "../../service/Api";
 
-export const AppBar = ({menuItems, handleChange}) => {
+export const AppBar = ({menuItems, handleChange, authenticatedUser}) => {
 
     const [formOpen, setFormOpen] = useState(false);
-    const [authenticated, setAuthenticated] = useState(isAuthenticated());
 
     return (
         <div
@@ -27,10 +26,10 @@ export const AppBar = ({menuItems, handleChange}) => {
                 />
             </nav>
 
-            {authenticated ?
+            {authenticatedUser ?
                 (
                     <div className={'app-bar__button-wrapper'}>
-                        <button onClick={() => {logout(); setAuthenticated(false)}} className={'button button--login'}>
+                        <button onClick={() => {logout()}} className={'button button--login'}>
                     <span>
                         Log Out
                     </span>
@@ -49,7 +48,7 @@ export const AppBar = ({menuItems, handleChange}) => {
 
 
             {formOpen && <LoginForm
-                setAuthenticated={setAuthenticated}
+                authenticatedUser={authenticatedUser}
                 setFormOpen={setFormOpen}
             />}
 

@@ -26,7 +26,6 @@ const navigation = (
     action
 ) => {
     switch (action.type) {
-
         case INVALIDATE_MENU_ITEM:
             return Object.assign({}, state, {
                 didInvalidate: true

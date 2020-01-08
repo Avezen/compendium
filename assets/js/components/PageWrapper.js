@@ -10,67 +10,92 @@ import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import * as PropTypes from "prop-types";
-import {cutToFirstOccurrence} from "../helpers";
-import {menuItems} from "../constans/menu";
-import {login} from "../service/Api";
+import {adminMenuItems, menuItems} from "../constans/menu";
+import {fetchAuthenticatedUser} from "../store/actions/authentication";
+import {isObjectEmpty} from "../helpers";
 
 
 class PageWrapperBase extends Component {
 
     componentDidMount() {
-        const {dispatch} = this.props;
+        const {selectMenuItem, fetchNavigationIfNeeded, fetchAuthenticatedUser, authenticatedUser} = this.props;
 
-        let initSelectedMenu = this.props.location.pathname.replace('/', '');
-        initSelectedMenu = cutToFirstOccurrence(initSelectedMenu, '/');
+        let selectedMenu = this.props.location.pathname.split('/')[1];
 
-        dispatch(selectMenuItem(initSelectedMenu));
-        dispatch(fetchNavigationIfNeeded(initSelectedMenu));
+        selectMenuItem(selectedMenu);
+        fetchNavigationIfNeeded(selectedMenu);
+        fetchAuthenticatedUser();
+
+        console.log(authenticatedUser);
     }
 
-    handleChange = (menuItem) => {
-        const {dispatch} = this.props;
+    handleChange = selectedMenu => {
+        const {selectMenuItem, fetchNavigationIfNeeded} = this.props;
 
-        dispatch(selectMenuItem(menuItem));
-        dispatch(fetchNavigationIfNeeded(menuItem));
+        selectMenuItem(selectedMenu);
+        fetchNavigationIfNeeded(selectedMenu);
     };
 
     handleRefreshClick = (e) => {
         e.preventDefault();
-        const {dispatch, selectedMenu} = this.props;
+        const {invalidateMenuItem, fetchNavigationIfNeeded, selectedMenu} = this.props;
 
-        dispatch(invalidateMenuItem(selectedMenu));
-        dispatch(fetchNavigationIfNeeded(selectedMenu));
+        invalidateMenuItem(selectedMenu);
+        fetchNavigationIfNeeded(selectedMenu);
     };
 
 
 
     render() {
-        const {children, navigation, selectedMenu} = this.props;
+        const {children, navigation, selectedMenu, authenticatedUser} = this.props;
+
 
         return (
-            <MainLayout
-                appBar={
-                    <AppBar
-                        menuItems={menuItems}
-                        handleChange={this.handleChange}
+            <React.Fragment>
+                {!isObjectEmpty(authenticatedUser.user) ? (
+                    <MainLayout
+                        appBar={
+                            <AppBar
+                                menuItems={adminMenuItems}
+                                handleChange={this.handleChange}
+                                authenticatedUser={authenticatedUser}
+                            />
+                        }
+                        navigation={
+                            <Navigation
+                                currentTree={selectedMenu}
+                                navigationItems={navigation}
+                            />
+                        }
+                        pageContent={children}
                     />
-                }
-                navigation={
-                    <Navigation
-                        currentTree={selectedMenu}
-                        navigationItems={navigation}
+                ) : (
+                    <MainLayout
+                        appBar={
+                            <AppBar
+                                menuItems={menuItems}
+                                handleChange={this.handleChange}
+                            />
+                        }
+                        navigation={
+                            <Navigation
+                                currentTree={selectedMenu}
+                                navigationItems={navigation}
+                            />
+                        }
+                        pageContent={children}
                     />
-                }
-                pageContent={children}
-            />
+                )}
+            </React.Fragment>
         );
     }
 }
 
 const PageWrapperWithRouter = withRouter(PageWrapperBase);
 
-function mapStateToProps(state) {
-    const {selectedMenu, navigationByMenu} = state;
+
+const mapStateToProps = state => {
+    const {selectedMenu, navigationByMenu, authenticatedUser} = state;
     const {isFetching, lastUpdated, items: navigation} = navigationByMenu[
         selectedMenu
         ] || {
@@ -82,12 +107,27 @@ function mapStateToProps(state) {
         selectedMenu,
         navigation,
         isFetching,
-        lastUpdated
+        lastUpdated,
+        authenticatedUser
     }
-}
+};
+
+
+const mapDispatchToProps = dispatch => {
+    return {
+        selectMenuItem: selectedMenu => dispatch(selectMenuItem(selectedMenu)),
+        fetchNavigationIfNeeded: selectedMenu => dispatch(fetchNavigationIfNeeded(selectedMenu)),
+        invalidateMenuItem: selectedMenu => dispatch(invalidateMenuItem(selectedMenu)),
+        fetchAuthenticatedUser: () => dispatch(fetchAuthenticatedUser())
+    };
+};
+
+
+
 
 export const PageWrapper = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(PageWrapperWithRouter);
 
 
@@ -95,6 +135,5 @@ PageWrapperBase.propTypes = {
     selectedMenu: PropTypes.string.isRequired,
     navigation: PropTypes.array,
     isFetching: PropTypes.bool.isRequired,
-    lastUpdated: PropTypes.number,
-    dispatch: PropTypes.func.isRequired
+    lastUpdated: PropTypes.number
 };

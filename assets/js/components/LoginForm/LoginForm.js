@@ -3,6 +3,9 @@ import {Button, Form} from "react-bootstrap";
 import {login, removeSessionToken, setSessionToken} from "../../service/Api";
 import {Transition, TransitionGroup} from "react-transition-group";
 import {animateModal, exit, play} from "../../service/Animate";
+import {fetchNavigationIfNeeded, invalidateMenuItem, selectMenuItem} from "../../store/actions/fetchNavigation";
+import {fetchAuthenticatedUser} from "../../store/actions/authentication";
+import {connect} from "react-redux";
 
 class LoginForm extends Component {
     state = {
@@ -27,16 +30,13 @@ class LoginForm extends Component {
                     this.onAuthenticationFailure
                 )
         );
-
     };
 
     onAuthenticationSuccess = ({data}) => {
         const user = (data.success || null);
-        setSessionToken(user);
+
         this.setState({user, isLoading: false}, () => {
-
-
-            this.props.setAuthenticated(true);
+            this.props.fetchAuthenticatedUser();
 
             setTimeout(() => {
                 this.closeForm();
@@ -47,9 +47,8 @@ class LoginForm extends Component {
 
     onAuthenticationFailure = ({response}) => {
         const error = (response.data.error || null);
-        removeSessionToken();
 
-        this.props.setAuthenticated(false);
+        this.props.fetchAuthenticatedUser();
         this.setState({
             error,
             isLoading: false,
@@ -146,4 +145,21 @@ class LoginForm extends Component {
     }
 }
 
-export default LoginForm;
+const mapStateToProps = state => {
+    const {authenticatedUser} = state;
+
+    return {
+        authenticatedUser
+    }
+};
+
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchAuthenticatedUser: () => dispatch(fetchAuthenticatedUser())
+    };
+};
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(LoginForm);

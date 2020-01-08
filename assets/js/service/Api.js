@@ -7,6 +7,7 @@ const AppAPI = axios.create({
 });
 
 export const fetchPage = (path) => AppAPI.get(`/api/page${path}`);
+export const fetchUser = (path) => AppAPI.get(`/api/is-authenticated`);
 export const downloadComponent = (path) => AppAPI.get(`/download${path}`);
 
 

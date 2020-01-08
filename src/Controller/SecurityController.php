@@ -48,11 +48,8 @@ class SecurityController extends AbstractController
 //             return $this->redirectToRoute('target_path');
 //         }
 
-        return new JsonResponse(
-            [
-                "success" => $this->getUser()
-            ]
-        );
+
+        return new JsonResponse($this->getUser());
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
